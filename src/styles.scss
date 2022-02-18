@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+
+  h1,
+  h2,
+  p {
+    margin: 0;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+$textColor: #293264;
+$buttonDark: #4d5b9e;
+$buttonLight: #d6dbf5;
+$white: #f5f7fb;
+$correct: #94d7a2;
+$incorrent: #f8bcbc;
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  // background: url('./images/intro-page.png') no-repeat;
+
+}
+.splash {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  // centering 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  > h1 {
+    font-family: Karla, sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    color: $textColor;
+    margin-bottom: 0.5rem;
+  }
+
+  > p {
+    color: $textColor;
+    font-size: 1rem;
+    font-family: Inter, sans-serif;
+    margin-bottom: 1.5rem;
+  }
+
+  button { 
+    background: $buttonDark;
+    color: $white;
+    font-size: 1rem;
+    font-family: Inter, sans-serif;
+    width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    border: none;
+  }
+}
