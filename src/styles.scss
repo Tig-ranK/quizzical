@@ -10,22 +10,25 @@
 
 body {
   margin: 0;
+  height: 100vh;
+  width: 100vw;
+  background-image: url('./images/intro-page.png');
+  background-size: 100% 100%;
 }
 
 $textColor: #293264;
 $buttonDark: #4d5b9e;
 $buttonLight: #d6dbf5;
-$white: #f5f7fb;
+$buttonWhite: #f5f7fb;
 $correct: #94d7a2;
 $incorrent: #f8bcbc;
 
 .container {
   height: 100vh;
-  width: 100vw;
+  width: clamp(10rem, 70%, 50rem);
+  margin: 0 auto;
   overflow-x: hidden;
-  background-image: url('./images/intro-page.png');
-  background-size: 100% 100%;
-  
+  padding: 2em 0;
 }
 
 .splash {
@@ -33,7 +36,7 @@ $incorrent: #f8bcbc;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  // centering 
+  // centering
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,17 +57,46 @@ $incorrent: #f8bcbc;
   }
 }
 
-.button { 
-  &.dark {
-    background: $buttonDark;
-  }
-  color: $white;
-  font-size: 1rem;
+// reusable button 👇
+@mixin button($fontSize, $bgColor, $borderColor, $textColor) {
+  background-color: $bgColor;
+  color: $textColor;
+  font-size: $fontSize;
   font-family: Inter, sans-serif;
+  font-weight: 500;
   padding: 1em 3.5em;
   border-radius: 1em;
   border: none;
+  border: 0.5px solid $borderColor;
   cursor: pointer;
 }
 
+.button.dark {
+  @include button(1rem, $buttonDark, $buttonDark, #fff);
+}
 
+.button.light {
+  @include button(0.8rem, $buttonWhite, $buttonDark, $textColor);
+  padding: 0.2em 0.5em;
+  min-width: 5rem;
+}
+
+.question {
+  &-title {
+    font-family: Karla, sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: $textColor;
+    margin-bottom: 0.8rem;
+    // line-height: 2.5rem;
+  }
+  &-btn-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  hr {
+    height: 0px;
+    border: 0.8px solid #dbdef0;
+  }
+}
