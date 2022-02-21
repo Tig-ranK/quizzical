@@ -81,6 +81,12 @@ $incorrent: #f8bcbc;
   min-width: 5rem;
 }
 
+.button.light.selected {
+  @include button(0.8rem, $buttonLight, $buttonLight, $textColor);
+  padding: 0.2em 0.5em;
+  min-width: 5rem;
+}
+
 .question {
   &-title {
     font-family: Karla, sans-serif;
