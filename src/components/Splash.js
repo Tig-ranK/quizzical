@@ -5,7 +5,7 @@ export default function Splash() {
     <div className='splash'>
       <h1>Quizzical</h1>
       <p>Some description if needed</p>
-      <button>Start Quiz</button>
+      <button className='button dark'>Start Quiz</button>
     </div>
   );
 }

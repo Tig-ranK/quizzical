@@ -10,7 +10,6 @@
 
 body {
   margin: 0;
-  padding: 0;
 }
 
 $textColor: #293264;
@@ -24,9 +23,11 @@ $incorrent: #f8bcbc;
   height: 100vh;
   width: 100vw;
   overflow-x: hidden;
-  // background: url('./images/intro-page.png') no-repeat;
-
+  background-image: url('./images/intro-page.png');
+  background-size: 100% 100%;
+  
 }
+
 .splash {
   position: absolute;
   top: 50%;
@@ -51,15 +52,19 @@ $incorrent: #f8bcbc;
     font-family: Inter, sans-serif;
     margin-bottom: 1.5rem;
   }
-
-  button { 
-    background: $buttonDark;
-    color: $white;
-    font-size: 1rem;
-    font-family: Inter, sans-serif;
-    width: 200px;
-    height: 50px;
-    border-radius: 15px;
-    border: none;
-  }
 }
+
+.button { 
+  &.dark {
+    background: $buttonDark;
+  }
+  color: $white;
+  font-size: 1rem;
+  font-family: Inter, sans-serif;
+  padding: 1em 3.5em;
+  border-radius: 1em;
+  border: none;
+  cursor: pointer;
+}
+
+
