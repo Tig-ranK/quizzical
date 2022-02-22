@@ -1,6 +1,7 @@
 import React from 'react';
-
+import {decode} from 'he'
 export default function Question(props) {
+  // structuring the data from API 👇
   const content = {
     category: props.content.category,
     difficulty: props.content.difficulty,
@@ -17,14 +18,14 @@ export default function Question(props) {
         }
         onClick={() => props.selectAnswer(props.index, idx)}
       >
-        {answer}
+        {decode(answer)}
       </button>
     )
   );
 
   return (
     <div className='question'>
-      <h2 className='question-title'>{content.question}</h2>
+      <h2 className='question-title'>{decode(content.question)}</h2>
       <div className='question-btn-wrapper'>{answersArray}</div>
       <hr />
     </div>
