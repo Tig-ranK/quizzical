@@ -11,9 +11,9 @@ async function fetchData(url) {
 }
 
 export default function App() {
-  const [selected, setSelected] = useState([0,0,0,0,0]);
+  const [selected, setSelected] = useState([0, 0, 0, 0, 0]);
   const [start, setStart] = useState(false);
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   function handleClick() {
     setStart((prev) => !prev);
   }
@@ -33,7 +33,7 @@ export default function App() {
   }
   const questionArray = selected.map((elem, index) => (
     <Question
-    content={data[index]}
+      content={data[index]}
       key={nanoid()}
       index={index}
       selected={elem}
@@ -43,7 +43,17 @@ export default function App() {
 
   return (
     <div className='container'>
-      {start ? <>{questionArray}</> : <Splash handleClick={handleClick} />}
+      {start ? (
+        <>
+          {questionArray}
+          <label className='question-score' htmlFor='play_again'>
+            You scored 3/5 correct answers.
+          </label>
+          <button id='play_again' className='button dark'>Play again</button>
+        </>
+      ) : (
+        <Splash handleClick={handleClick} />
+      )}
     </div>
   );
 }
