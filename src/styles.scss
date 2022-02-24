@@ -31,6 +31,7 @@ $incorrect: #f8bcbc;
   padding: 2em 0;
 
   // scrollbar
+  scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
@@ -81,37 +82,29 @@ $incorrect: #f8bcbc;
   border: 0.5px solid $borderColor;
   cursor: pointer;
 }
-@mixin buttonSmall($fontSize, $bgColor, $borderColor, $textColor) {
-  @include button($fontSize, $bgColor, $borderColor, $textColor);
-  padding: 0.2em 0.5em;
-  min-width: 5rem;
-}
-.button.dark {
-  @include button(1rem, $buttonDark, $buttonDark, #fff);
-}
 
-.button.light {
-  @include button(0.8rem, $buttonWhite, $buttonDark, $textColor);
+@mixin buttonSmall($bgColor, $borderColor, $textColor) {
+  @include button(0.8rem, $bgColor, $borderColor, $textColor);
   padding: 0.2em 0.5em;
   min-width: 5rem;
 }
 
-.button.light.selected {
-  @include button(0.8rem, $buttonLight, $buttonLight, $textColor);
-  padding: 0.2em 0.5em;
-  min-width: 5rem;
-}
-
-.button.correct {
-  @include button(0.8rem, $correct, $buttonLight, $textColor);
-  padding: 0.2em 0.5em;
-  min-width: 5rem;
-}
-
-.button.incorrect {
-  @include button(0.8rem, $incorrect, $buttonLight, $textColor);
-  padding: 0.2em 0.5em;
-  min-width: 5rem;
+.button {
+  &.dark {
+    @include button(1rem, $buttonDark, $buttonDark, #fff);
+  }
+  &.light {
+    @include buttonSmall($buttonWhite, $buttonDark, $textColor);
+  }
+  &.light.selected {
+    @include buttonSmall($buttonLight, $buttonLight, $textColor);
+  }
+  &.correct {
+    @include buttonSmall($correct, $buttonLight, $textColor);
+  }
+  &.incorrect {
+    @include buttonSmall($incorrect, $buttonLight, $textColor);
+  }
 }
 
 .question {

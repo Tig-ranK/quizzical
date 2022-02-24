@@ -6,11 +6,25 @@ export default function Question(props) {
   const content = {
     question: props.question,
     answers: props.answers,
+    selected_answer: props.selected_answer,
     correct_answer: props.correct_index,
   };
   // console.log(content)
+
+  const handleClick = (e) => {
+    console.log(e.target.id);
+  };
   const answersArray = content.answers.map((answer, idx) => (
-    <button key={idx} className={idx===content.correct_answer ? 'button correct' : 'button incorrect'}>
+    <button
+      key={idx}
+      id={idx}
+      onClick={handleClick}
+      className={
+        idx === content.selected_answer
+          ? 'button light selected'
+          : 'button light'
+      }
+    >
       {decode(answer)}
     </button>
   ));

@@ -31,6 +31,7 @@ export default function App() {
             question,
             answers,
             correct_index,
+            selected_answer: 0,
             id: nanoid(),
           };
         })
@@ -50,12 +51,13 @@ export default function App() {
   // }
 
   const questionsArray = questions.map(
-    ({ id, question, answers, correct_index }) => (
+    ({ id, question, answers, correct_index, selected_answer }) => (
       <Question
         key={id}
         question={question}
         answers={answers}
         correct_index={correct_index}
+        selected_answer={selected_answer}
       />
     )
   );
