@@ -43,17 +43,16 @@ export default function App() {
 
   return (
     <div className='container'>
-      {start ? (
-        <>
-          {questionArray}
-          <label className='question-score' htmlFor='play_again'>
-            You scored 3/5 correct answers.
-          </label>
-          <button id='play_again' className='button dark'>Play again</button>
-        </>
-      ) : (
-        <Splash handleClick={handleClick} />
-      )}
+      {start ? <>{questionArray}</> : <Splash handleClick={handleClick} />}
     </div>
   );
 }
+
+// {false && (
+//   <label className='question-score' htmlFor='play_again'>
+//     You scored 3/5 correct answers.
+//   </label>
+// )}
+// <button id='play_again' className='button dark'>
+//   Play again
+// </button>

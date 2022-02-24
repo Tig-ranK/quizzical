@@ -29,6 +29,17 @@ $incorrent: #f8bcbc;
   margin: 0 auto;
   overflow-x: hidden;
   padding: 2em 0;
+
+  // scrollbar
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  > button {
+    display: block;
+    margin: 20px auto 0px;
+  }
 }
 
 .splash {

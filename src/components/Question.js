@@ -1,5 +1,5 @@
 import React from 'react';
-import {decode} from 'he'
+import {decode} from 'he' // decoding weird characters from API call 
 export default function Question(props) {
   // structuring the data from API 👇
   const content = {
