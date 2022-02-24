@@ -11,48 +11,70 @@ async function fetchData(url) {
 }
 
 export default function App() {
-  const [selected, setSelected] = useState([0, 0, 0, 0, 0]);
   const [start, setStart] = useState(false);
-  const [data, setData] = useState([]);
+  const [questions, setQuestions] = useState([]);
   function handleClick() {
-    setStart((prev) => !prev);
+    if (questions.length !== 0) setStart((prev) => !prev);
   }
 
   useEffect(() => {
     const url =
       'https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple';
-    fetchData(url).then(setData);
+    fetchData(url).then((res) =>
+      setQuestions(
+        res.map(({ question, correct_answer, incorrect_answers }) => {
+          let answers = [...incorrect_answers];
+          const correct_index = Math.floor(Math.random() * 5);
+          answers.splice(correct_index, 0, correct_answer); // inserting the correct answer to a random place
+
+          return {
+            question,
+            answers,
+            correct_index,
+            id: nanoid(),
+          };
+        })
+      )
+    );
   }, []);
 
-  function selectAnswer(questionNumber, answerNumber) {
-    setSelected((prev) => {
-      let copy = prev.slice();
-      copy[questionNumber] = answerNumber;
-      return copy;
-    });
-  }
-  const questionArray = selected.map((elem, index) => (
-    <Question
-      content={data[index]}
-      key={nanoid()}
-      index={index}
-      selected={elem}
-      selectAnswer={selectAnswer}
-    />
-  ));
+  useEffect(() => {
+    console.table(questions);
+  }, [questions]);
+  // function selectAnswer(questionNumber, answerNumber) {
+  //   setSelected((prev) => {
+  //     let copy = prev.slice();
+  //     copy[questionNumber] = answerNumber;
+  //     return copy;
+  //   });
+  // }
 
+  const questionsArray = questions.map(
+    ({ id, question, answers, correct_index }) => (
+      <Question
+        key={id}
+        question={question}
+        answers={answers}
+        correct_index={correct_index}
+      />
+    )
+  );
   return (
     <div className='container'>
-      {start ? <>{questionArray}</> : <Splash handleClick={handleClick} />}
+      {start ? (
+        <>
+          {questionsArray}
+          <button id='play_again' className='button dark'>
+            Play again
+          </button>
+        </>
+      ) : (
+        <Splash handleClick={handleClick} />
+      )}
     </div>
   );
 }
 
-// {false && (
-//   <label className='question-score' htmlFor='play_again'>
-//     You scored 3/5 correct answers.
-//   </label>
-// )}
-// <button id='play_again' className='button dark'>
-//   Play again
-// </button>
+/* <label className='question-score' htmlFor='play_again'>
+You scored 3/5 correct answers.
+</label> */

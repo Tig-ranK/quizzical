@@ -1,14 +1,14 @@
 import React from 'react';
 import {decode} from 'he' // decoding weird characters from API call 
+
 export default function Question(props) {
   // structuring the data from API 👇
   const content = {
-    category: props.content.category,
-    difficulty: props.content.difficulty,
-    question: props.content.question,
-    answers: [...props.content.incorrect_answers, props.content.correct_answer],
+    question: props.question,
+    answers: props.answers,
+    correct_answer: props.correct_answer
   };
-  console.log(content)
+  // console.log(content)
   const answersArray = content.answers.map(
     (answer, idx) => (
       <button
@@ -16,7 +16,6 @@ export default function Question(props) {
         className={
           idx === props.selected ? 'button light selected' : 'button light'
         }
-        onClick={() => props.selectAnswer(props.index, idx)}
       >
         {decode(answer)}
       </button>
