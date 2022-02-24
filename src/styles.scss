@@ -21,7 +21,7 @@ $buttonDark: #4d5b9e;
 $buttonLight: #d6dbf5;
 $buttonWhite: #f5f7fb;
 $correct: #94d7a2;
-$incorrent: #f8bcbc;
+$incorrect: #f8bcbc;
 
 .container {
   height: 100vh;
@@ -81,7 +81,11 @@ $incorrent: #f8bcbc;
   border: 0.5px solid $borderColor;
   cursor: pointer;
 }
-
+@mixin buttonSmall($fontSize, $bgColor, $borderColor, $textColor) {
+  @include button($fontSize, $bgColor, $borderColor, $textColor);
+  padding: 0.2em 0.5em;
+  min-width: 5rem;
+}
 .button.dark {
   @include button(1rem, $buttonDark, $buttonDark, #fff);
 }
@@ -94,6 +98,18 @@ $incorrent: #f8bcbc;
 
 .button.light.selected {
   @include button(0.8rem, $buttonLight, $buttonLight, $textColor);
+  padding: 0.2em 0.5em;
+  min-width: 5rem;
+}
+
+.button.correct {
+  @include button(0.8rem, $correct, $buttonLight, $textColor);
+  padding: 0.2em 0.5em;
+  min-width: 5rem;
+}
+
+.button.incorrect {
+  @include button(0.8rem, $incorrect, $buttonLight, $textColor);
   padding: 0.2em 0.5em;
   min-width: 5rem;
 }

@@ -24,7 +24,7 @@ export default function App() {
       setQuestions(
         res.map(({ question, correct_answer, incorrect_answers }) => {
           let answers = [...incorrect_answers];
-          const correct_index = Math.floor(Math.random() * 5);
+          const correct_index = Math.floor(Math.random() * 4);
           answers.splice(correct_index, 0, correct_answer); // inserting the correct answer to a random place
 
           return {
