@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Splash from './components/Splash';
 import Question from './components/Question';
 import { nanoid } from 'nanoid';
+import Confetti from 'react-confetti';
 import './styles.scss';
 
 async function fetchData(url) {
@@ -21,43 +22,41 @@ export default function App() {
   useEffect(() => {
     const url =
       'https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple';
-    fetchData(url).then((res) =>
-      setQuestions(
-        res.map(({ question, correct_answer, incorrect_answers }) => {
-          let answers = [...incorrect_answers];
-          const correctAnswer = Math.floor(Math.random() * 4);
-          answers.splice(correctAnswer, 0, correct_answer); // inserting the correct answer to a random place
+    if (check === false)
+      fetchData(url).then((res) =>
+        setQuestions(
+          res.map(({ question, correct_answer, incorrect_answers }) => {
+            let answers = [...incorrect_answers];
+            const correctAnswer = Math.floor(Math.random() * 4);
+            answers.splice(correctAnswer, 0, correct_answer); // inserting the correct answer to a random place
 
-          return {
-            question,
-            answers,
-            correctAnswer,
-            selectedAnswer: 0,
-            id: nanoid(),
-          };
-        })
-      )
-    );
-  }, []);
-
-  useEffect(() => {
-    console.table(questions);
-  }, [questions]);
+            return {
+              question,
+              answers,
+              correctAnswer,
+              selectedAnswer: 0,
+              id: nanoid(),
+            };
+          })
+        )
+      );
+  }, [check]);
 
   const handleStart = () => {
     if (questions.length !== 0) setStart((prev) => !prev);
   };
 
   const chooseAnswer = (e, id) => {
-    !check && setQuestions((prev) =>
-      prev.map((question) => {
-        if (question.id === id) {
-          return { ...question, selectedAnswer: Number(e.target.id) };
-        } else {
-          return question;
-        }
-      })
-    );
+    !check &&
+      setQuestions((prev) =>
+        prev.map((question) => {
+          if (question.id === id) {
+            return { ...question, selectedAnswer: Number(e.target.id) };
+          } else {
+            return question;
+          }
+        })
+      );
   };
 
   const questionsArray = questions.map(
@@ -84,24 +83,28 @@ export default function App() {
 
   return (
     <div className='container'>
+      {correctAmount === 5 && <Confetti />}
       {start ? (
         <>
           {questionsArray}
 
-          {check && (
-            <label className='question-score' htmlFor='play_again'>
-              You scored {checkCorrect()}/5 correct answers.
-            </label>
-          )}
-          <button
-            id='play_again'
-            className='button dark'
-            onClick={() => {
-              setCheck((prev) => !prev);
-            }}
-          >
-            {!check ? 'Check answers' : 'Play again'}
-          </button>
+          <div className='question-score-wrapper'>
+            {check && (
+              <label className='question-score' htmlFor='play_again'>
+                You scored {correctAmount}/5 correct answers.
+              </label>
+            )}
+            <button
+              id='play_again'
+              className='question-play_again'
+              onClick={() => {
+                setCheck((prev) => !prev);
+                setCorrectAmount(checkCorrect());
+              }}
+            >
+              {!check ? 'Check answers' : 'Play again'}
+            </button>
+          </div>
         </>
       ) : (
         <Splash handleStart={handleStart} />

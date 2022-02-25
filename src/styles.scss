@@ -36,16 +36,11 @@ $incorrect: #f8bcbc;
   &::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
   }
-
-  > button {
-    display: inline-block;
-    margin: 1.25rem auto 0;
-  }
 }
 
 .splash {
   position: absolute;
-  top: 50%;
+  top: 47.5%;
   left: 50%;
   transform: translate(-50%, -50%);
   // centering
@@ -132,10 +127,20 @@ $incorrect: #f8bcbc;
     height: 0px;
     border: 0.8px solid #dbdef0;
   }
+  &-score-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
   &-score {
     font-family: Inter;
     font-weight: bold;
     font-size: 1.1rem;
     color: $textColor;
+    margin-right: auto;
+  }
+  &-play_again {
+    @extend .button.dark;
   }
 }
