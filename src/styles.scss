@@ -79,7 +79,7 @@ $incorrect: #f8bcbc;
   padding: 1em 3.5em;
   border-radius: 1em;
   border: none;
-  border: 0.5px solid $borderColor;
+  border: 1.2px solid $borderColor;
   cursor: pointer;
 }
 
@@ -104,6 +104,13 @@ $incorrect: #f8bcbc;
   }
   &.incorrect {
     @include buttonSmall($incorrect, $buttonLight, $textColor);
+  }
+  &.discarded {
+    @include buttonSmall($buttonWhite, #a1a9cc, #8f94af);
+  }
+  &.incorrect.discarded {
+    @include buttonSmall($incorrect, $incorrect, #8f94af);
+    
   }
 }
 
