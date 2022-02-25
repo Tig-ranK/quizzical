@@ -38,8 +38,8 @@ $incorrect: #f8bcbc;
   }
 
   > button {
-    display: block;
-    margin: 20px auto 0px;
+    display: inline-block;
+    margin: 1.25rem auto 0;
   }
 }
 
@@ -124,5 +124,11 @@ $incorrect: #f8bcbc;
   hr {
     height: 0px;
     border: 0.8px solid #dbdef0;
+  }
+  &-score {
+    font-family: Inter;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: $textColor;
   }
 }

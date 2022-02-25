@@ -13,9 +13,6 @@ async function fetchData(url) {
 export default function App() {
   const [start, setStart] = useState(false);
   const [questions, setQuestions] = useState([]);
-  function handleClick() {
-    if (questions.length !== 0) setStart((prev) => !prev);
-  }
 
   useEffect(() => {
     const url =
@@ -39,17 +36,6 @@ export default function App() {
     );
   }, []);
 
-  useEffect(() => {
-    console.table(questions);
-  }, [questions]);
-  // function selectAnswer(questionNumber, answerNumber) {
-  //   setSelected((prev) => {
-  //     let copy = prev.slice();
-  //     copy[questionNumber] = answerNumber;
-  //     return copy;
-  //   });
-  // }
-
   const questionsArray = questions.map(
     ({ id, question, answers, correct_index, selected_answer }) => (
       <Question
@@ -61,22 +47,27 @@ export default function App() {
       />
     )
   );
+
+  const handleStart = () => {
+    if (questions.length !== 0) setStart((prev) => !prev);
+  };
+
   return (
     <div className='container'>
       {start ? (
         <>
           {questionsArray}
+
+          <label className='question-score' htmlFor='play_again'>
+            You scored 3/5 correct answers.
+          </label>
           <button id='play_again' className='button dark'>
-            Play again
+            {true ? 'Check answers' : 'Play again'}
           </button>
         </>
       ) : (
-        <Splash handleClick={handleClick} />
+        <Splash handleStart={handleStart} />
       )}
     </div>
   );
 }
-
-/* <label className='question-score' htmlFor='play_again'>
-You scored 3/5 correct answers.
-</label> */
