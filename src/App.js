@@ -20,10 +20,8 @@ export default function App() {
   });
   const [check, setCheck] = useState(false);
   useEffect(() => {
-    const url =
-      'https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple';
     if (check === false)
-      fetchData(url).then((res) =>
+      fetchData(process.env.REACT_APP_API_URL).then((res) =>
         setQuestions(
           res.map(({ question, correct_answer, incorrect_answers }) => {
             let answers = [...incorrect_answers];
